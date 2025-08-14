@@ -27,6 +27,9 @@ export class TareasComponent implements OnInit, OnDestroy {
   // con el hashtag de cada actividad para que todos vean tu aventura en La Belleza 🎉
 
   private sliderInterval: any;
+  private readonly STORAGE_KEY = 'tareas-la-belleza-2025';
+  private readonly VERSION_KEY = 'tareas-version';
+  private readonly CURRENT_VERSION = '1.0';
 
   tareas: Tarea[] = [
     {
@@ -150,6 +153,8 @@ export class TareasComponent implements OnInit, OnDestroy {
 
   tareasCompletadas = 0;
   progresoTotal = 0;
+  mostrarNotificacion = false;
+  mensajeNotificacion = '';
 
 
   currentSlide = 0;
@@ -177,6 +182,7 @@ export class TareasComponent implements OnInit, OnDestroy {
   constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
+    this.cargarProgresoDesdeCacheODefecto();
     this.calcularProgreso();
     this.startSlider();
   }
@@ -200,6 +206,7 @@ export class TareasComponent implements OnInit, OnDestroy {
       tarea.completada = !tarea.completada;
       tarea.progreso = tarea.completada ? 100 : 0;
       this.calcularProgreso();
+      this.guardarProgresoEnCache();
     }
   }
 
@@ -212,6 +219,7 @@ export class TareasComponent implements OnInit, OnDestroy {
         tarea.progreso = 100;
       }
       this.calcularProgreso();
+      this.guardarProgresoEnCache();
     }
   }
 
@@ -224,7 +232,88 @@ export class TareasComponent implements OnInit, OnDestroy {
         tarea.progreso = 0;
       }
       this.calcularProgreso();
+      this.guardarProgresoEnCache();
     }
+  }
+
+  // Métodos de gestión de caché
+  private cargarProgresoDesdeCacheODefecto(): void {
+    try {
+      const versionGuardada = localStorage.getItem(this.VERSION_KEY);
+      const progresoGuardado = localStorage.getItem(this.STORAGE_KEY);
+      
+      // Si la versión cambió o no hay datos, usar valores por defecto
+      if (versionGuardada !== this.CURRENT_VERSION || !progresoGuardado) {
+        this.resetearYGuardarCache();
+        return;
+      }
+
+      const progresoData = JSON.parse(progresoGuardado);
+      
+      // Actualizar solo el progreso y estado de completada de las tareas existentes
+      this.tareas.forEach(tarea => {
+        const tareaGuardada = progresoData.find((t: any) => t.id === tarea.id);
+        if (tareaGuardada) {
+          tarea.completada = tareaGuardada.completada || false;
+          tarea.progreso = tareaGuardada.progreso || 0;
+        }
+      });
+      
+      console.log('✅ Progreso cargado desde caché');
+      this.mostrarNotificacionTemporal('📚 Progreso restaurado');
+    } catch (error) {
+      console.warn('⚠️ Error al cargar caché, usando valores por defecto:', error);
+      this.resetearYGuardarCache();
+    }
+  }
+
+  private guardarProgresoEnCache(): void {
+    try {
+      const progresoData = this.tareas.map(tarea => ({
+        id: tarea.id,
+        completada: tarea.completada,
+        progreso: tarea.progreso
+      }));
+      
+      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(progresoData));
+      localStorage.setItem(this.VERSION_KEY, this.CURRENT_VERSION);
+      
+      console.log('💾 Progreso guardado en caché');
+    } catch (error) {
+      console.warn('⚠️ Error al guardar en caché:', error);
+    }
+  }
+
+  private resetearYGuardarCache(): void {
+    // Resetear todas las tareas a estado inicial
+    this.tareas.forEach(tarea => {
+      tarea.completada = false;
+      tarea.progreso = 0;
+    });
+    
+    this.guardarProgresoEnCache();
+    console.log('🔄 Caché reseteado con valores por defecto');
+  }
+
+  // Método público para limpiar caché (opcional para debugging)
+  limpiarCache(): void {
+    localStorage.removeItem(this.STORAGE_KEY);
+    localStorage.removeItem(this.VERSION_KEY);
+    this.resetearYGuardarCache();
+    this.calcularProgreso();
+    console.log('🗑️ Caché limpiado completamente');
+    this.mostrarNotificacionTemporal('🗑️ Progreso reiniciado');
+  }
+
+  private mostrarNotificacionTemporal(mensaje: string): void {
+    this.mensajeNotificacion = mensaje;
+    this.mostrarNotificacion = true;
+    this.cdr.detectChanges();
+    
+    setTimeout(() => {
+      this.mostrarNotificacion = false;
+      this.cdr.detectChanges();
+    }, 3000);
   }
 
   private calcularProgreso(): void {
