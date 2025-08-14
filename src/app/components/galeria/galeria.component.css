@@ -1,0 +1,619 @@
+/* Optimizaciones globales para nitidez de texto */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:host {
+  display: block;
+}
+
+/* Animaciones para el toast */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px) scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.animate-slideUp {
+  animation: slideUp 0.3s ease-out;
+}
+
+/* Mejor sombreado para texto en imágenes */
+.text-shadow-strong {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 1px 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+/* Flip Card Styles */
+.flip-card {
+  background-color: transparent;
+  perspective: 1200px; /* Aumenté la perspectiva para menos distorsión */
+  cursor: pointer;
+  height: auto;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: auto;
+  text-align: center;
+  transition: transform 0.5s cubic-bezier(0.4, 0.0, 0.2, 1); /* Curva de animación más suave */
+  transform-style: preserve-3d;
+  /* Inicialmente mostramos el frente */
+  transform: rotateY(0deg);
+  /* Optimizaciones para texto nítido */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  backface-visibility: hidden;
+  transform3d: translateZ(0);
+}
+
+.flip-card.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: relative;
+  width: 100%;
+  height: auto;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 0.75rem;
+  /* Optimizaciones adicionales para nitidez */
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+.flip-card-front {
+  /* El frente se muestra por defecto */
+  transform: rotateY(0deg);
+  z-index: 2;
+}
+
+.flip-card-back {
+  /* El dorso está oculto inicialmente */
+  transform: rotateY(180deg);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  /* Mejoras específicas para el texto del dorso */
+  will-change: transform;
+}
+
+/* Las reglas para imágenes están definidas más abajo en la sección de masonry */
+
+/* Modo compacto para imágenes pequeñas */
+.flip-card-back .bg-white.compact-mode {
+  padding: 0.5rem !important;
+}
+
+.flip-card-back .bg-white.compact-mode .content-area {
+  gap: 0.25rem;
+}
+
+.flip-card-back .bg-white.compact-mode .text-center {
+  margin-bottom: 0.5rem !important;
+}
+
+.flip-card-back .bg-white.compact-mode .description-text {
+  margin-bottom: 0.5rem !important;
+  line-height: 1.3 !important;
+}
+
+.flip-card-back .bg-white.compact-mode .buttons-area {
+  gap: 0.25rem;
+}
+
+.flip-card-back .bg-white.compact-mode .buttons-area button {
+  padding: 0.25rem 0.5rem !important;
+  font-size: 0.75rem !important;
+}
+
+/* Asegurar que el contenido no se desborde */
+.content-area {
+  overflow: hidden;
+  min-height: 0;
+  flex: 1;
+}
+
+.description-text {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+
+/* Mejoras específicas para móviles - sin scroll */
+@media (max-width: 768px) {
+  .flip-card-back .bg-white {
+    padding: 0.5rem !important;
+    overflow: hidden !important;
+  }
+
+  .content-area {
+    gap: 0.25rem;
+  }
+
+  .description-text {
+    font-size: 0.75rem !important;
+    line-height: 1.3 !important;
+    -webkit-line-clamp: 2;
+  }
+
+  .buttons-area button {
+    padding: 0.375rem 0.75rem !important;
+    font-size: 0.75rem !important;
+  }
+
+  /* Hacer los iconos más pequeños en móviles */
+  .content-area i {
+    font-size: 1rem !important;
+  }
+
+  .content-area h3 {
+    font-size: 0.875rem !important;
+    line-height: 1.2 !important;
+  }
+}
+
+/* Asegurar que nunca aparezca scroll en ningún elemento */
+.flip-card-back * {
+  overflow: visible;
+  -webkit-overflow-scrolling: touch;
+}
+
+.flip-card-back .bg-white {
+  touch-action: manipulation;
+}
+
+/* Mejoras específicas para el contenido de texto */
+.flip-card-back h3,
+.flip-card-back p,
+.flip-card-back span,
+.flip-card-back button {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* Masonry Grid Layout - Forzar múltiples columnas */
+/* Grid de masonería con CSS Columns para eliminar espacios */
+.masonry-grid {
+  columns: 3;
+  column-gap: 1.25rem;
+  width: 100%;
+}
+
+/* Responsividad con CSS Columns */
+@media (min-width: 1280px) {
+  .masonry-grid {
+    columns: 4;
+    column-gap: 1.5rem;
+  }
+
+  .masonry-item {
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1279px) {
+  .masonry-grid {
+    columns: 3;
+    column-gap: 1rem;
+  }
+
+  .masonry-item {
+    margin-bottom: 1rem;
+  }
+}
+
+/* Móviles - 2 columnas */
+@media (max-width: 767px) {
+  .masonry-grid {
+    columns: 2;
+    column-gap: 0.75rem;
+  }
+
+  .masonry-item {
+    margin-bottom: 0.75rem;
+  }
+}
+
+/* Pantallas muy pequeñas - 1 columna */
+@media (max-width: 480px) {
+  .masonry-grid {
+    columns: 1;
+    column-gap: 0;
+  }
+
+  .masonry-item {
+    margin-bottom: 1rem;
+  }
+}
+
+/* Elementos de la galería con CSS Columns */
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 1.25rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  position: relative;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  display: inline-block;
+  width: 100%;
+}
+
+.masonry-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+}
+
+/* Imágenes responsivas */
+.masonry-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+/* Estilos para diferentes orientaciones de imagen */
+.masonry-item.vertical-image {
+  /* Las imágenes verticales mantienen su altura natural */
+}
+
+.masonry-item.horizontal-image {
+  /* Las imágenes horizontales mantienen su altura natural */
+}
+
+.masonry-item.square-image {
+  /* Las imágenes cuadradas mantienen su altura natural */
+}
+
+/* Animaciones para el toast */
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.animate-slideUp {
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.masonry-item {
+  /* Elementos para columnas CSS */
+  display: inline-block !important;
+  width: 100% !important;
+  margin: 0 0 0.5rem 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+
+  /* Evitar que se rompan entre columnas */
+  -webkit-column-break-inside: avoid !important;
+  -moz-column-break-inside: avoid !important;
+  break-inside: avoid !important;
+  page-break-inside: avoid !important;
+
+  vertical-align: top !important;
+  position: relative !important;
+}/* Hacer que las imágenes se adapten a su contenido natural */
+.flip-card-front img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 0.75rem;
+  min-height: 150px; /* Reducir altura mínima para imágenes horizontales */
+  max-height: 600px; /* Aumentar altura máxima para más flexibilidad */
+  object-fit: cover;
+}
+
+/* Clases específicas para diferentes orientaciones */
+.flip-card-front img.horizontal-image {
+  min-height: 150px;
+  max-height: 300px; /* Limitar altura para imágenes horizontales */
+}
+
+.flip-card-front img.vertical-image {
+  min-height: 250px;
+  max-height: 600px; /* Permitir más altura para imágenes verticales */
+}
+
+.flip-card-front img.square-image {
+  min-height: 200px;
+  max-height: 400px; /* Tamaño medio para imágenes cuadradas */
+}
+
+/* Ajustar la carta trasera para que coincida con la imagen */
+.flip-card-back .bg-white {
+  min-height: 150px; /* Coincidir con la imagen */
+  max-height: 600px; /* Coincidir con la imagen */
+  height: 100%;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Utilidades para line-clamp */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Responsive grid con CSS Columns */
+@media (min-width: 480px) {
+  .masonry-grid {
+    -webkit-column-count: 2 !important;
+    -moz-column-count: 2 !important;
+    column-count: 2 !important;
+
+    -webkit-column-gap: 0.75rem !important;
+    -moz-column-gap: 0.75rem !important;
+    column-gap: 0.75rem !important;
+  }
+}
+
+@media (min-width: 640px) {
+  .masonry-grid {
+    -webkit-column-count: 3 !important;
+    -moz-column-count: 3 !important;
+    column-count: 3 !important;
+
+    -webkit-column-gap: 1rem !important;
+    -moz-column-gap: 1rem !important;
+    column-gap: 1rem !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .masonry-grid {
+    -webkit-column-count: 3 !important;
+    -moz-column-count: 3 !important;
+    column-count: 3 !important;
+
+    -webkit-column-gap: 1rem !important;
+    -moz-column-gap: 1rem !important;
+    column-gap: 1rem !important;
+  }
+
+  /* Permitir que imágenes horizontales ocupen más espacio en pantallas medianas */
+  .flip-card-front img.horizontal-image {
+    max-height: 250px;
+  }
+
+  .flip-card-front img.vertical-image {
+    max-height: 500px;
+  }
+
+  .flip-card-front img.square-image {
+    max-height: 350px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .masonry-grid {
+    -webkit-column-count: 4 !important;
+    -moz-column-count: 4 !important;
+    column-count: 4 !important;
+
+    -webkit-column-gap: 1rem !important;
+    -moz-column-gap: 1rem !important;
+    column-gap: 1rem !important;
+  }
+
+  /* En pantallas grandes, permitir más flexibilidad */
+  .flip-card-front img.horizontal-image {
+    max-height: 280px;
+  }
+
+  .flip-card-front img.vertical-image {
+    max-height: 550px;
+  }
+
+  .flip-card-front img.square-image {
+    max-height: 380px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .masonry-grid {
+    -webkit-column-count: 4 !important;
+    -moz-column-count: 4 !important;
+    column-count: 4 !important;
+
+    -webkit-column-gap: 1.25rem !important;
+    -moz-column-gap: 1.25rem !important;
+    column-gap: 1.25rem !important;
+  }
+}
+
+@media (min-width: 1536px) {
+  .masonry-grid {
+    -webkit-column-count: 5 !important;
+    -moz-column-count: 5 !important;
+    column-count: 5 !important;
+
+    -webkit-column-gap: 1.5rem !important;
+    -moz-column-gap: 1.5rem !important;
+    column-gap: 1.5rem !important;
+  }
+
+  /* En pantallas muy grandes, optimizar para todas las orientaciones */
+  .flip-card-front img.horizontal-image {
+    max-height: 320px;
+  }
+
+  .flip-card-front img.vertical-image {
+    max-height: 600px;
+  }
+
+  .flip-card-front img.square-image {
+    max-height: 420px;
+  }
+}/* Optimizaciones para dispositivos móviles */
+@media (max-width: 479px) {
+  .masonry-grid {
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+
+    -webkit-column-gap: 0.25rem;
+    -moz-column-gap: 0.25rem;
+    column-gap: 0.25rem;
+  }
+
+  .masonry-item {
+    margin-bottom: 0.25rem;
+  }
+
+  /* Hacer que las imágenes sean más pequeñas en móviles muy pequeños */
+  .masonry-item img {
+    max-height: 300px;
+    object-fit: cover;
+  }
+}/* Animaciones suaves para flip cards */
+.flip-card {
+  transition: transform 0.2s ease-in-out;
+}
+
+.flip-card:hover {
+  transform: translateY(-2px);
+}
+
+.masonry-item img {
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Efectos hover - solo en dispositivos que los soportan */
+@media (hover: hover) {
+  .group:hover img {
+    transform: scale(1.05);
+  }
+
+  .group:hover .group-hover\:opacity-100 {
+    opacity: 1;
+  }
+
+  .group:hover .group-hover\:scale-110 {
+    transform: scale(1.1);
+  }
+}
+
+/* Mejoras para accesibilidad en móviles */
+@media (max-width: 768px) {
+  .flip-card-back .bg-white {
+    padding: 1rem;
+  }
+
+  /* Asegurar que el contenido del flip sea legible en móviles */
+  .flip-card-back h3 {
+    font-size: 1rem;
+  }
+
+  .flip-card-back p {
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+}
+
+/* Asegurar que las imágenes se carguen correctamente */
+.flip-card-front img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 0.75rem;
+}
+
+/* Prevenir que el texto se desborde */
+.flip-card-back h3,
+.flip-card-back p {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Estilo especial para la tarjeta trasera */
+.flip-card-back .bg-white {
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Animación de entrada suave */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.masonry-item {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Staggered animation delay para efecto cascada */
+.masonry-item:nth-child(1) { animation-delay: 0.1s; }
+.masonry-item:nth-child(2) { animation-delay: 0.2s; }
+.masonry-item:nth-child(3) { animation-delay: 0.3s; }
+.masonry-item:nth-child(4) { animation-delay: 0.4s; }
+.masonry-item:nth-child(5) { animation-delay: 0.5s; }
+.masonry-item:nth-child(6) { animation-delay: 0.6s; }
+.masonry-item:nth-child(7) { animation-delay: 0.7s; }
+.masonry-item:nth-child(8) { animation-delay: 0.8s; }
