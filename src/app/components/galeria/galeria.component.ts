@@ -169,6 +169,14 @@ export class GaleriaComponent implements OnInit {
         sourceLink: 'https://carengonzalezcolbosco.blogspot.com/2014/05/la-belleza.html'
       },
       {
+        id: 2,
+        url: 'https://i.ibb.co/RTg7VbyK/80875810-Master.jpg',
+        title: 'Chorro de la Humareda',
+        description: 'Impresionante caída de agua de aproximadamente 250 metros de altura en la vereda La Humareda, La Belleza, Santander (ruta de septiembre de 2022 por DXMARIUS).',
+        author: 'DXMARIUS',
+        sourceLink: 'https://es.wikiloc.com/rutas-senderismo/buscando-el-chorro-la-humareda-la-belleza-santander-septiembre-de-2022-126622891/photo-80875810'
+      },
+      {
         id: 3,
         url: 'https://i.ibb.co/3mBWBZv3/484363126-1399428751393664-6757293111037892361-n.jpg',
         title: 'La Quitaz',
@@ -177,22 +185,54 @@ export class GaleriaComponent implements OnInit {
         sourceLink: 'https://www.instagram.com/juliandid_4?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=='
       },
       {
-        id: 2,
-        url: 'https://i.ibb.co/RTg7VbyK/80875810-Master.jpg',
-        title: 'Chorro de la Humareda',
-        description: 'Impresionante caída de agua de aproximadamente 250 metros de altura en la vereda La Humareda, La Belleza, Santander (ruta de septiembre de 2022 por DXMARIUS).',
-        author: 'DXMARIUS',
-        sourceLink: 'https://es.wikiloc.com/rutas-senderismo/buscando-el-chorro-la-humareda-la-belleza-santander-septiembre-de-2022-126622891/photo-80875810'
-      },
-
-      {
         id: 4,
         url: 'https://i.ibb.co/4ZDzkHkB/141725605-1758025927708966-9221455924495421158-n.jpg',
         title: 'Los 3 Amigos',
         description: 'Conjunto de tres árboles unidos entre sí en la entrada del municipio de La Belleza, Santander, que simbolizan la amistad y cercanía de su comunidad.',
         author: 'alexandra_marin.17',
         sourceLink: 'https://www.instagram.com/alexandra_marin.17/?utm_source=ig_web_button_share_sheet'
+      },
+      {
+        id: 5,
+        url: 'https://i.ibb.co/1YW6T7HX/Whats-App-Image-2025-08-14-at-11-31-54-PM.jpg',
+        title: 'Parque de La Belleza',
+        description: 'Vista panorámica del parque principal de La Belleza, Santander, donde se distinguen claramente la pileta central, la iglesia del pueblo y parte de su entorno urbano y natural. Una escena que retrata el corazón social y religioso del municipio.',
+        author: 'carengonzalezcolbosco.blogspot.com',
+        sourceLink: 'https://carengonzalezcolbosco.blogspot.com/2014/05/la-belleza.html'
+      },
+      {
+        id: 6,
+        url: 'https://i.ibb.co/hRFFzZVV/Whats-App-Image-2025-08-15-at-12-27-21-AM.jpg',
+        title: 'Parque Central',
+        description: 'Una vista hermosa y relajante del parque central, que invita a disfrutar de la tranquilidad y belleza natural que ofrece este espacio en La Belleza.',
+        author: 'Peter Zanger',
+        sourceLink: 'https://berlin-labelleza.blogspot.com/'
+      },
+      {
+        id: 7,
+        url: 'https://i.ibb.co/84NpBsKh/Whats-App-Image-2025-08-15-at-12-27-49-AM.jpg',
+        title: 'Interior de la iglesia de La Belleza',
+        description: 'Detalle del interior de la iglesia de La Belleza, que muestra su arquitectura tradicional y un ambiente solemne que refleja la historia y fe de la comunidad local.',
+        author: 'Peter Zanger',
+        sourceLink: 'https://berlin-labelleza.blogspot.com/'
+      },
+      {
+        id: 8,
+        url: 'https://i.ibb.co/Q3457shB/Whats-App-Image-2025-08-15-at-12-28-25-AM.jpg',
+        title: 'Colegio Don Bosco',
+        description: 'En la imagen se ve la entrada del Colegio Don Bosco de La Belleza, con sus rejas y rampa características que dan acceso a la institución educativa.',
+        author: 'Peter Zanger',
+        sourceLink: 'https://berlin-labelleza.blogspot.com/'
+      },
+      {
+        id: 9,
+        url: 'https://i.ibb.co/39jydZrS/Whats-App-Image-2025-08-15-at-12-55-22-AM.jpg',
+        title: 'Iglesia',
+        description: 'En la imagen se aprecia una parte del parque principal junto con la iglesia de La Belleza, un punto de referencia emblemático del municipio.',
+        author: 'Alcaldía de La Belleza',
+        sourceLink: 'https://www.bluradio.com/blu360/santanderes/tres-obreros-murieron-en-la-belleza-santander-por-inhalacion-de-gases-toxicos-rg10'
       }
+
     ];
   }
 

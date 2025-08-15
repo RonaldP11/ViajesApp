@@ -241,7 +241,7 @@ export class TareasComponent implements OnInit, OnDestroy {
     try {
       const versionGuardada = localStorage.getItem(this.VERSION_KEY);
       const progresoGuardado = localStorage.getItem(this.STORAGE_KEY);
-      
+
       // Si la versión cambió o no hay datos, usar valores por defecto
       if (versionGuardada !== this.CURRENT_VERSION || !progresoGuardado) {
         this.resetearYGuardarCache();
@@ -249,7 +249,7 @@ export class TareasComponent implements OnInit, OnDestroy {
       }
 
       const progresoData = JSON.parse(progresoGuardado);
-      
+
       // Actualizar solo el progreso y estado de completada de las tareas existentes
       this.tareas.forEach(tarea => {
         const tareaGuardada = progresoData.find((t: any) => t.id === tarea.id);
@@ -258,7 +258,7 @@ export class TareasComponent implements OnInit, OnDestroy {
           tarea.progreso = tareaGuardada.progreso || 0;
         }
       });
-      
+
       console.log('✅ Progreso cargado desde caché');
       this.mostrarNotificacionTemporal('📚 Progreso restaurado');
     } catch (error) {
@@ -274,10 +274,10 @@ export class TareasComponent implements OnInit, OnDestroy {
         completada: tarea.completada,
         progreso: tarea.progreso
       }));
-      
+
       localStorage.setItem(this.STORAGE_KEY, JSON.stringify(progresoData));
       localStorage.setItem(this.VERSION_KEY, this.CURRENT_VERSION);
-      
+
       console.log('💾 Progreso guardado en caché');
     } catch (error) {
       console.warn('⚠️ Error al guardar en caché:', error);
@@ -290,7 +290,7 @@ export class TareasComponent implements OnInit, OnDestroy {
       tarea.completada = false;
       tarea.progreso = 0;
     });
-    
+
     this.guardarProgresoEnCache();
     console.log('🔄 Caché reseteado con valores por defecto');
   }
@@ -309,7 +309,7 @@ export class TareasComponent implements OnInit, OnDestroy {
     this.mensajeNotificacion = mensaje;
     this.mostrarNotificacion = true;
     this.cdr.detectChanges();
-    
+
     setTimeout(() => {
       this.mostrarNotificacion = false;
       this.cdr.detectChanges();
