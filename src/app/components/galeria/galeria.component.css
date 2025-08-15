@@ -4,10 +4,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-:host {
-  display: block;
-}
-
 /* Animaciones para el toast */
 @keyframes fadeIn {
   from {
@@ -283,20 +279,8 @@
   transition: transform 0.3s ease;
 }
 
-/* Estilos para diferentes orientaciones de imagen */
-.masonry-item.vertical-image {
-  /* Las imágenes verticales mantienen su altura natural */
-}
 
-.masonry-item.horizontal-image {
-  /* Las imágenes horizontales mantienen su altura natural */
-}
 
-.masonry-item.square-image {
-  /* Las imágenes cuadradas mantienen su altura natural */
-}
-
-/* Animaciones para el toast */
 .animate-fadeIn {
   animation: fadeIn 0.3s ease-out;
 }
