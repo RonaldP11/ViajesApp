@@ -1,0 +1,248 @@
+<div class="min-h-screen bg-gradient-to-br from-blue-50 via-cyan-50 to-teal-50 pb-20 pt-4">
+  @if (mostrarNotificacion) {
+    <div class="fixed top-4 right-4 z-50 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg animate-bounce">
+      {{ mensajeNotificacion }}
+    </div>
+  }
+
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Header cultural elegante -->
+    <div class="text-center mb-8">
+      <!-- Título principal con diseño cultural -->
+      <div class="relative mb-8 py-6">
+
+
+        <h1 class="text-4xl sm:text-5xl font-serif font-bold mb-3 text-gray-800 leading-tight">
+          Ferias y Fiestas 50 años
+          <span class="block text-3xl sm:text-4xl text-amber-700 mt-2 font-light italic">
+            60 años • ColBosco
+          </span>
+        </h1>
+
+        <!-- Información contextual elegante -->
+        <div class="flex items-center justify-center gap-6 text-gray-600 font-medium mt-4">
+          <div class="flex items-center gap-1">
+            <i class="fas fa-map-marker-alt text-amber-600"></i>
+            <span class="text-sm">Santander, Colombia</span>
+          </div>
+          <div class="hidden sm:block w-px h-4 bg-gray-300"></div>
+          <div class="flex items-center gap-1">
+            <i class="fas fa-calendar-days text-amber-600"></i>
+            <span class="text-sm">Agosto 14-18, 2025</span>
+          </div>
+        </div>
+
+        <!-- Ornamentos inferiores -->
+        <div class="flex justify-center mt-4">
+          <div class="flex items-center space-x-4 text-amber-600">
+            <div class="w-16 h-px bg-gradient-to-r from-transparent to-amber-600"></div>
+
+            <div class="w-16 h-px bg-gradient-to-l from-transparent to-amber-600"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slider cultural elegante -->
+      <div class="relative mb-8 h-28 overflow-hidden rounded-xl shadow-lg">
+        @for (item of sliderItems; track $index) {
+          <div class="absolute inset-0 transition-all duration-1000 ease-in-out"
+               [class]="$index === currentSlide ? 'opacity-100 transform translate-x-0' : 'opacity-0 transform ' + ($index < currentSlide ? 'translate-x-full' : '-translate-x-full')">
+            <div class="bg-gradient-to-r {{ item.gradient }} h-full flex items-center text-white relative overflow-hidden">
+              <!-- Patrón de fondo sutil -->
+              <div class="absolute inset-0 opacity-10">
+                <div class="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent"></div>
+              </div>
+
+              <div class="relative z-10 flex items-center justify-center w-full px-6 mb-6">
+                <div class="text-center">
+                  <div class="flex items-center justify-center mb-2">
+                    <i class="{{ item.icon }} text-2xl mr-3 drop-shadow-lg"></i>
+                    <h3 class="text-lg font-bold drop-shadow-lg">{{ item.title }}</h3>
+                  </div>
+                  <p class="text-sm leading-relaxed drop-shadow-md opacity-95">{{ item.description }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+
+        <!-- Indicadores del slider más elegantes -->
+        <div class="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex space-x-2">
+          @for (item of sliderItems; track $index) {
+            <div class="w-2 h-2 rounded-full transition-all duration-500 border border-white/30"
+                 [class]="$index === currentSlide ? 'bg-white scale-125' : 'bg-white/40 hover:bg-white/70'"></div>
+          }
+        </div>
+      </div>
+
+      <!-- Barra de progreso mejorada -->
+      <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-6 mb-6 border border-white/20">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-xl font-bold text-gray-800 flex items-center">
+            <i class="fas fa-chart-line text-blue-600 mr-2"></i>
+            Tu Progreso
+          </h3>
+          <div class="text-right">
+            <span class="text-3xl font-black bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">{{ progresoTotal }}%</span>
+            <div class="text-xs text-gray-500 mt-1">completado</div>
+          </div>
+        </div>
+
+        <!-- Barra de progreso con efectos -->
+        <div class="relative w-full bg-gray-200 rounded-full h-6 mb-4 overflow-hidden shadow-inner">
+          <div class="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 h-full rounded-full transition-all duration-1000 ease-out"
+               [style.width.%]="progresoTotal">
+            <!-- Efecto brillante -->
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12 animate-pulse"></div>
+          </div>
+          <!-- Texto dentro de la barra -->
+          <div class="absolute inset-0 flex items-center justify-center text-xs font-bold text-white drop-shadow-lg">
+            {{ tareasCompletadas }}/{{ tareas.length }}
+          </div>
+        </div>
+
+        <div class="flex justify-between items-center text-sm">
+          <span class="text-gray-600 flex items-center">
+            <i class="fas fa-check-circle text-green-500 mr-1"></i>
+            {{ tareasCompletadas }} experiencias completadas
+          </span>
+          <div class="flex items-center gap-4">
+            <span class="text-gray-600 flex items-center">
+              <i class="fas fa-rocket text-orange-500 mr-1"></i>
+              ¡Sigue explorando!
+            </span>
+            <!-- Botón discreto para limpiar caché (desarrollo) -->
+            <button (click)="limpiarCache()"
+                    class="opacity-30 hover:opacity-100 transition-opacity duration-300 text-xs text-gray-400 hover:text-red-500"
+                    title="Limpiar progreso guardado">
+              <i class="fas fa-refresh"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grid de tareas -->
+    <div class="grid gap-6 md:grid-cols-1 lg:grid-cols-2">
+      @for (tarea of getFiltroTareas(); track tarea.id) {
+        <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
+             [class.opacity-75]="tarea.completada"
+             [class.ring-2]="tarea.completada"
+             [class.ring-green-400]="tarea.completada">
+
+          <!-- Header de la tarjeta -->
+          <div class="p-6 pb-4">
+            <div class="flex items-start justify-between mb-4">
+              <div class="flex items-center">
+                <div class="flex-shrink-0 mr-4">
+                  <div class="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 flex items-center justify-center text-white">
+                    <i [class]="tarea.icono"></i>
+                  </div>
+                </div>
+                <div class="flex-1">
+                  <h3 class="text-xl font-bold text-gray-900 mb-1"
+                      [class.line-through]="tarea.completada">
+                    {{ tarea.titulo }}
+                  </h3>
+                  <div class="flex items-center space-x-2 mb-2">
+                    <span [class]="getCategoriaColor(tarea.categoria)"
+                          class="px-2 py-1 text-xs font-medium rounded-full border">
+                      {{ tarea.categoria | titlecase }}
+                    </span>
+                    <div class="w-2 h-2 rounded-full" [class]="getPrioridadColor(tarea.prioridad)"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Checkbox principal -->
+              <button (click)="toggleTarea(tarea.id)"
+                      class="w-8 h-8 rounded-full border-2 transition-all duration-200 flex items-center justify-center"
+                      [class.bg-green-500]="tarea.completada"
+                      [class.border-green-500]="tarea.completada"
+                      [class.border-gray-300]="!tarea.completada"
+                      [class.hover:border-green-400]="!tarea.completada">
+                @if (tarea.completada) {
+                  <i class="fas fa-check text-white text-sm"></i>
+                }
+              </button>
+            </div>
+
+            <!-- Descripción -->
+            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+              {{ tarea.descripcion }}
+            </p>
+
+            <!-- Información adicional -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4 text-sm">
+              <div class="flex items-center text-gray-500">
+                <i class="fas fa-calendar-alt mr-2 text-blue-500"></i>
+                {{ tarea.fecha }}
+              </div>
+              <div class="flex items-center text-gray-500">
+                <i class="fas fa-map-marker-alt mr-2 text-red-500"></i>
+                {{ tarea.ubicacion }}
+              </div>
+              <div class="flex items-center text-gray-500">
+                <i class="fas fa-clock mr-2 text-green-500"></i>
+                {{ tarea.duracion }}
+              </div>
+            </div>
+
+            <!-- Barra de progreso individual -->
+            <div class="mb-4">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-sm font-medium text-gray-700">Progreso</span>
+                <span class="text-sm font-bold text-gray-900">{{ tarea.progreso }}%</span>
+              </div>
+              <div class="w-full bg-gray-200 rounded-full h-2">
+                <div class="bg-gradient-to-r from-green-400 to-blue-500 h-2 rounded-full transition-all duration-300"
+                     [style.width.%]="tarea.progreso"></div>
+              </div>
+            </div>
+
+            <!-- Controles de progreso -->
+            <div class="flex items-center justify-between">
+              <div class="flex space-x-2">
+                <button (click)="decrementarProgreso(tarea.id)"
+                        [disabled]="tarea.progreso <= 0"
+                        class="w-8 h-8 rounded-full bg-red-500 text-white flex items-center justify-center transition-all duration-200 hover:bg-red-600 disabled:bg-gray-300 disabled:cursor-not-allowed">
+                  <i class="fas fa-minus text-xs"></i>
+                </button>
+                <button (click)="incrementarProgreso(tarea.id)"
+                        [disabled]="tarea.progreso >= 100"
+                        class="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center transition-all duration-200 hover:bg-green-600 disabled:bg-gray-300 disabled:cursor-not-allowed">
+                  <i class="fas fa-plus text-xs"></i>
+                </button>
+              </div>
+
+              @if (tarea.completada) {
+                <div class="flex items-center text-green-600">
+                  <i class="fas fa-check-circle mr-2"></i>
+                  <span class="text-sm font-medium">¡Completada!</span>
+                </div>
+              } @else {
+                <span class="text-sm text-gray-500">En progreso...</span>
+              }
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- Mensaje motivacional -->
+    @if (progresoTotal === 100) {
+      <div class="mt-8 bg-gradient-to-r from-green-400 to-blue-500 rounded-xl shadow-lg p-8 text-center text-white">
+        <i class="fas fa-trophy text-6xl mb-4"></i>
+        <h2 class="text-3xl font-bold mb-2">¡Felicitaciones!</h2>
+        <p class="text-lg">Has completado todas las actividades de las fiestas. ¡Eres un verdadero experto en La Belleza!</p>
+      </div>
+    } @else if (progresoTotal >= 50) {
+      <div class="mt-8 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-xl shadow-lg p-6 text-center text-white">
+        <i class="fas fa-star text-4xl mb-3"></i>
+        <h3 class="text-xl font-bold mb-2">¡Vas por buen camino!</h3>
+        <p>Ya has completado más de la mitad de las actividades. ¡Sigue explorando!</p>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,279 @@
+:host {
+  display: block;
+}
+
+/* Animaciones personalizadas */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Animaciones aplicadas */
+.bg-white {
+  animation: slideInUp 0.6s ease-out;
+}
+
+.bg-white:nth-child(1) { animation-delay: 0.1s; }
+.bg-white:nth-child(2) { animation-delay: 0.2s; }
+.bg-white:nth-child(3) { animation-delay: 0.3s; }
+.bg-white:nth-child(4) { animation-delay: 0.4s; }
+.bg-white:nth-child(5) { animation-delay: 0.5s; }
+.bg-white:nth-child(6) { animation-delay: 0.6s; }
+.bg-white:nth-child(7) { animation-delay: 0.7s; }
+.bg-white:nth-child(8) { animation-delay: 0.8s; }
+
+/* Efectos hover mejorados */
+.bg-white:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Efectos de botones */
+button:active {
+  transform: scale(0.95);
+}
+
+/* Barra de progreso animada */
+.bg-gradient-to-r {
+  background-size: 200% 200%;
+  animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Efectos cuando se completa una tarea */
+.ring-2.ring-green-400 {
+  animation: bounceIn 0.6s ease-out;
+}
+
+/* Efectos de texto tachado suaves */
+.line-through {
+  text-decoration: line-through;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+/* Iconos con efecto hover */
+.fas {
+  transition: transform 0.2s ease;
+}
+
+.fas:hover {
+  transform: scale(1.1);
+}
+
+/* Efectos de sombra personalizados */
+.shadow-lg {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1), 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.shadow-xl {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive mejoras */
+@media (max-width: 768px) {
+  .grid-cols-1 {
+    gap: 1rem;
+  }
+
+  .p-6 {
+    padding: 1rem;
+  }
+
+  .text-4xl {
+    font-size: 2rem;
+  }
+}
+
+/* Efectos de focus para accesibilidad */
+button:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Transiciones suaves para todos los elementos interactivos */
+* {
+  transition: all 0.2s ease;
+}
+
+/* Efectos especiales para tarjetas completadas */
+.opacity-75 {
+  position: relative;
+  overflow: hidden;
+}
+
+.opacity-75::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(34, 197, 94, 0.1), transparent);
+  transform: rotate(45deg);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+}
+
+/* Nuevas animaciones para el diseño cultural */
+@keyframes ornamentGlow {
+  0%, 100% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes titleElegance {
+  0%, 100% {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  50% {
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes gradientShiftCultural {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Aplicar animaciones culturales */
+.font-serif {
+  animation: titleElegance 4s ease-in-out infinite;
+}
+
+/* Ornamentos con animación sutil */
+.fas.fa-star-of-david,
+.fas.fa-cross {
+  animation: ornamentGlow 3s ease-in-out infinite;
+}
+
+/* Slider cultural mejorado */
+.slider-cultural {
+  background: linear-gradient(45deg, rgba(0,0,0,0.05), transparent);
+}
+
+/* Efectos para gradientes culturales */
+.bg-gradient-to-r.from-amber-600,
+.bg-gradient-to-r.from-slate-600,
+.bg-gradient-to-r.from-emerald-700 {
+  background-size: 200% 200%;
+  animation: gradientShiftCultural 8s ease infinite;
+}
+
+/* Líneas ornamentales */
+.w-16.h-px {
+  background: linear-gradient(to right, transparent, currentColor, transparent);
+}
+
+/* Mejorar transiciones del slider */
+.transition-all.duration-1000 {
+  transition: all 1000ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Sombras culturales más sutiles */
+.drop-shadow-lg {
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+}
+
+.drop-shadow-md {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+/* Efecto glassmorphism mejorado */
+.backdrop-blur-sm {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Slider mejorado */
+.slider-container {
+  perspective: 1000px;
+}
+
+/* Efectos para la barra de progreso */
+.progress-shine {
+  animation: progressShine 2s ease-in-out infinite;
+}
+
+/* Responsividad mejorada */
+@media (max-width: 640px) {
+  .text-5xl {
+    font-size: 2.5rem;
+  }
+
+  .text-6xl {
+    font-size: 3rem;
+  }
+}
