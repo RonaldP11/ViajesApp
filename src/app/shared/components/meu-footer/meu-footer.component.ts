@@ -8,15 +8,15 @@ import { filter } from 'rxjs/operators';
   imports: [RouterModule, CommonModule],
   template: `
 <!-- Menú de navegación fijo en la parte inferior -->
-<div class="fixed bottom-0 left-0 right-0 px-5 pb-5 z-50">
+<div class="fixed bottom-0 left-0 right-0 px-2 sm:px-5 pb-2 sm:pb-5 z-50">
     <div class="w-full max-w-md mx-auto">
-        <div class="px-7 shadow-lg rounded-2xl backdrop-blur-sm bg-white/90">
+        <div class="px-3 sm:px-7 shadow-lg rounded-2xl backdrop-blur-sm bg-white/90">
             <div class="flex">
                 <div class="flex-1 group">
                     <a routerLink="/principal"
-                       [class]="'flex items-end justify-center text-center mx-auto px-4 pt-2 w-full ' + (currentRoute === '/principal' ? 'text-indigo-500' : 'text-gray-400 group-hover:text-indigo-500')">
+                       [class]="'flex items-end justify-center text-center mx-auto px-1 sm:px-4 pt-2 w-full ' + (currentRoute === '/principal' ? 'text-indigo-500' : 'text-gray-400 group-hover:text-indigo-500')">
                         <span class="block px-1 pt-1 pb-1">
-                            <i class="fas fa-home text-2xl pt-1 mb-1 block"></i>
+                            <i class="fas fa-home text-lg sm:text-2xl pt-1 mb-1 block"></i>
                             <span class="block text-xs pb-2">Principal</span>
                             <span [class]="'block w-5 mx-auto h-1 rounded-full ' + (currentRoute === '/principal' ? 'bg-indigo-500' : 'group-hover:bg-indigo-500')"></span>
                         </span>
@@ -24,9 +24,9 @@ import { filter } from 'rxjs/operators';
                 </div>
                 <div class="flex-1 group">
                     <a routerLink="/maps"
-                       [class]="'flex items-end justify-center text-center mx-auto px-4 pt-2 w-full ' + (currentRoute === '/maps' ? 'text-indigo-500' : 'text-gray-400 group-hover:text-indigo-500')">
+                       [class]="'flex items-end justify-center text-center mx-auto px-1 sm:px-4 pt-2 w-full ' + (currentRoute === '/maps' ? 'text-indigo-500' : 'text-gray-400 group-hover:text-indigo-500')">
                         <span class="block px-1 pt-1 pb-1">
-                            <i class="fas fa-map-marked-alt text-2xl pt-1 mb-1 block"></i>
+                            <i class="fas fa-map-marked-alt text-lg sm:text-2xl pt-1 mb-1 block"></i>
                             <span class="block text-xs pb-2">Mapa</span>
                             <span [class]="'block w-5 mx-auto h-1 rounded-full ' + (currentRoute === '/maps' ? 'bg-indigo-500' : 'group-hover:bg-indigo-500')"></span>
                         </span>
@@ -34,20 +34,21 @@ import { filter } from 'rxjs/operators';
                 </div>
                 <div class="flex-1 group">
                     <a routerLink="/galeria"
-                       [class]="'flex items-end justify-center text-center mx-auto px-4 pt-2 w-full ' + (currentRoute === '/galeria' ? 'text-indigo-500' : 'text-gray-400 group-hover:text-indigo-500')">
+                       [class]="'flex items-end justify-center text-center mx-auto px-1 sm:px-4 pt-2 w-full ' + (currentRoute === '/galeria' ? 'text-indigo-500' : 'text-gray-400 group-hover:text-indigo-500')">
                         <span class="block px-1 pt-1 pb-1">
-                            <i class="fas fa-images text-2xl pt-1 mb-1 block"></i>
+                            <i class="fas fa-images text-lg sm:text-2xl pt-1 mb-1 block"></i>
                             <span class="block text-xs pb-2">Galería</span>
                             <span [class]="'block w-5 mx-auto h-1 rounded-full ' + (currentRoute === '/galeria' ? 'bg-indigo-500' : 'group-hover:bg-indigo-500')"></span>
                         </span>
                     </a>
                 </div>
                 <div class="flex-1 group">
-                    <a href="tareas" class="flex items-end justify-center text-center mx-auto px-4 pt-2 w-full text-gray-400 group-hover:text-indigo-500">
+                    <a routerLink="/tareas"
+                       [class]="'flex items-end justify-center text-center mx-auto px-1 sm:px-4 pt-2 w-full ' + (currentRoute === '/tareas' ? 'text-indigo-500' : 'text-gray-400 group-hover:text-indigo-500')">
                         <span class="block px-1 pt-1 pb-1">
-                            <i class="fas fa-calendar-check text-2xl pt-1 mb-1 block"></i>
+                            <i class="fas fa-calendar-check text-lg sm:text-2xl pt-1 mb-1 block"></i>
                             <span class="block text-xs pb-2">Actividades</span>
-                            <span class="block w-5 mx-auto h-1 group-hover:bg-indigo-500 rounded-full"></span>
+                            <span [class]="'block w-5 mx-auto h-1 rounded-full ' + (currentRoute === '/tareas' ? 'bg-indigo-500' : 'group-hover:bg-indigo-500')"></span>
                         </span>
                     </a>
                 </div>
